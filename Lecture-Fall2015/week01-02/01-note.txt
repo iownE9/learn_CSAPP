@@ -1,0 +1,46 @@
+steve@D:~$ gdb
+
+GNU gdb (Ubuntu 12.0.90-0ubuntu1) 12.0.90
+
+For help, type "help".
+
+Type "apropos word" to search for commands related to "word".
+
+(gdb) print 40000*40000
+
+$1 = 1600000000
+
+(gdb) print 50000*50000
+
+$2 = -1794967296
+
+(gdb) 
+
+$3 = -1794967296
+
+(gdb) print 300 * 400 * 500 * 600
+
+$4 = 1640261632
+
+(gdb) print 400 * 500 * 600 * 300
+
+$5 = 1640261632
+
+(gdb) print ( 1e20 + -1e20 ) + 3.14 
+
+$6 = 3.1400000000000001
+
+(gdb) print 1e20 + ( -1e20 + 3.14 ) 
+
+$7 = 0
+
+(gdb) print 1e20 + -1e20 + 3.14 
+
+$8 = 3.1400000000000001
+
+(gdb) print 1e20 +3.14+ -1e20 
+
+$9 = 0
+
+(gdb) 
+
