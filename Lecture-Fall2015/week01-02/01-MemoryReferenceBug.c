@@ -1,12 +1,10 @@
 /**
- * @author Steve
- * @date 2022/10/01
  * *
  * Environment: Linux
- * Compilation: gcc lect01_MemoryReferenceBug.c -o lect01_MemoryReferenceBug
- * Execution:   ./lect01_MemoryReferenceBug
+ * Compilation: gcc 01-MemoryReferenceBug.c -o 01-MemoryReferenceBug
+ * Execution:   ./01-MemoryReferenceBug
  * *
- * description:
+ * description: a[2] a[3] 会改变 d 的值
  **/
 
 #include <stdio.h>
@@ -23,8 +21,11 @@ double fun(int i)
     s.d = 3.14;
     // Possibly out of bounds
     s.a[i] = 1073741824;
+    // s.a[i] = 33;
+    // s.a[i] = 10;
     return s.d;
 }
+
 int main(void)
 {
     for (int i = 0; i < 7; i++)
@@ -36,8 +37,8 @@ int main(void)
 }
 
 /*
-steve@D /a/l/lecture [SIGABRT]> gcc lect01_MemoryReferenceBug.c -o lect01_MemoryReferenceBug
-steve@D /a/l/lecture> ./lect01_MemoryReferenceBug
+steve@D /a/l/lecture [SIGABRT]> gcc 01-MemoryReferenceBug.c -o 01-MemoryReferenceBug
+steve@D /a/l/lecture> ./01-MemoryReferenceBug
 
 0  3.140000
 

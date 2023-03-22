@@ -1,12 +1,8 @@
 /**
- * @author Steve
- * @date 2022/10/30
  * *
  * Environment: Linux
- * Compilation: gcc performance.c -o performance
- * Execution:   ./performance
- * *
- * Recombination:   gcc performance.c -o performance ; ./performance ; rm ./performance
+ * Compilation: gcc 01-performance.c -o 01-performance
+ * Execution:   ./01-performance
  * *
  * description:
  **/

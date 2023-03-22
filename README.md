@@ -8,7 +8,7 @@
 
 | dir | desc | src |
 | - | - | - |
-| booksite | 习题和书本代码 |  |
+| booksite | 习题和书本代码 | <http://csapp.cs.cmu.edu/> |
 | Lab | 配套实验 | <http://csapp.cs.cmu.edu/3e/labs.html> |
 | Lecture-Fall2015 | 讲座资料 | 15213-f15 |
 | Lib | CSAPP3rd.pdf | |
