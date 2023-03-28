@@ -63,4 +63,3 @@ dkms.conf
 *.tar
 .vscode
 Booksite/code/*
-Lab/online/*
