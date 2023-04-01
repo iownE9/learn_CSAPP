@@ -2,9 +2,6 @@
  * CS:APP Data Lab
  *
  * <Please put your name and userid here>
- * @author Steve
- * @email iownE9@163.com
- * @date 2022/10/22  3:00
  *
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -146,7 +143,7 @@ NOTES:
  */
 int bitXor(int x, int y)
 {
-  return ~x & y;
+  return (~(~x & ~y)) & (~(x & y));
 }
 /*
  * tmin - return minimum two's complement integer
@@ -168,7 +165,8 @@ int tmin(void)
  */
 int isTmax(int x)
 {
-  return !(x ^ (1 << 31) + 1);
+  int a = ~x;
+  return (!((x + 1) ^ a) + !a) & 0x1;
 }
 /*
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -180,7 +178,9 @@ int isTmax(int x)
  */
 int allOddBits(int x)
 {
-  return !(~x & (0xAA + 0xAA << 8 + 0xAA << 16 + 0xAA << 24));
+  int allOdd = 0xAA + (0xAA << 8) + (0xAA << 16) + (0xAA << 24);
+  return !((~x) & allOdd);
+  // return !((x & allOdd) ^ allOdd);
 }
 /*
  * negate - return -x
@@ -205,10 +205,18 @@ int negate(int x)
  */
 int isAsciiDigit(int x)
 {
+  // int a = !(x >> 6);                       // 1
+  // int b = !((x & 0x30) ^ 0x30);              // 1
+  // int c = !(((x & 0x8) + !(x & 0x6)) ^ 0x8); // 0
+  // return a & b & (!c);
+
   int a = !((x >> 4) ^ 0x3);
-  int b = ((x >> 3) & 0x1);
-  int c = ((x >> 1) & 0x3);
-  return a & (!b | !c);
+  // int b = !((x >> 3) & 0x1);
+  // int c = !((x >> 1) & 0x3);
+  int b = !(x & 0x8);
+  int c = !(x & 0x6);
+
+  return a & (b | c);
 }
 /*
  * conditional - same as x ? y : z
@@ -219,15 +227,8 @@ int isAsciiDigit(int x)
  */
 int conditional(int x, int y, int z)
 {
-
-  // // int a = !x + y;          // x!=0 y
-  // // int b = x ^ z;           // x=0  z
-  // // return y ^ z ^ (x | y);  // x=0   z
-  // // return y ^ z ^ (!x & z); // x!=0  y
-
-  // int a = y ^ z;
-  // return a ^ (0);
-  return ~(!x >> 31) & y + ~x & z;
+  int a = !x + ~0x0; //-1 或 0
+  return (a & y) + (a | z) + (!(!a));
 }
 /*
  * isLessOrEqual - if x <= y  then return 1, else return 0
@@ -238,7 +239,22 @@ int conditional(int x, int y, int z)
  */
 int isLessOrEqual(int x, int y)
 {
-  return 2;
+  int min = 0x1 << 31;
+  int max = ~min;
+
+  int x1 = !(x & min);
+  int y1 = !(y & min);
+
+  int x2 = x & max;
+  int y2 = y & max;
+
+  int sub = y2 + (~x2) + 1;
+  int c = !(sub & min);
+
+  // x1==y1 返回 c;否则 y1
+  int b = x1 ^ y1;
+  int a = !b + ~0x0; //-1 或 0
+  return (a & y1) + (a | c) + (!(!a));
 }
 // 4
 /*
@@ -251,7 +267,8 @@ int isLessOrEqual(int x, int y)
  */
 int logicalNeg(int x)
 {
-  return 2;
+  int a = x | ((~x) + 1);
+  return (a >> 31) + 1;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
@@ -267,7 +284,49 @@ int logicalNeg(int x)
  */
 int howManyBits(int x)
 {
-  return 0;
+  /*
+   *  howManyBits(12) = 5   01100
+   *  howManyBits(298) = 10 01010011000
+   *  howManyBits(-5) = 4   1011 -8+2+1
+   *  howManyBits(0)  = 1   0
+   *  howManyBits(-1) = 1   1
+   *  howManyBits(0x80000000) = 32 100..0
+   */
+
+  // -1 11...111 -> 1
+  // -2 11...101 -> 10
+  // 1  00...001 -> 1
+
+  // 负数 1  正数 0
+  int f = !(!(x >> 31));
+  // x>>n + f == 0 返回 n 的最小值
+
+  // 二分查找
+  int a = !(!((x >> 16) + f));
+  // a = 1 -> 检查高位
+  // 要先声明
+  int b16, b8, b4, b2, b1, b;
+  b16 = a << 4;
+  x = x >> b16;
+
+  a = !(!((x >> 8) + f));
+  b8 = a << 3;
+  x = x >> b8;
+
+  a = !(!((x >> 4) + f));
+  b4 = a << 2;
+  x = x >> b4;
+
+  a = !(!((x >> 2) + f));
+  b2 = a << 1;
+  x = x >> b2;
+
+  a = !(!((x >> 1) + f));
+  b1 = a;
+  x = x >> b1;
+
+  b = f ^ (x & 0x1);
+  return 1 + b + b1 + b2 + b4 + b8 + b16;
 }
 // float
 /*
@@ -283,7 +342,28 @@ int howManyBits(int x)
  */
 unsigned floatScale2(unsigned uf)
 {
-  return 2;
+
+  unsigned mask = (1 << 8) - 1;
+  unsigned sign = (uf >> 31) & 0x1;
+  unsigned exp = (uf >> 23) & mask;
+  unsigned frac = uf & ((1 << 23) - 1);
+
+  // NaN infinity
+  if (exp == mask)
+  {
+    return uf;
+  }
+
+  // 0 -> 0 ; 0x80000000 -> 0x80000000 ; 1 -> 2
+  if (exp == 0)
+  {
+    return (sign << 31) + (frac << 1);
+  }
+
+  // 0x3f800000 -> 0x40000000
+  exp = (exp + 1) & mask;
+  return (sign << 31) + (exp << 23) + frac;
+  // 结果一会用uint解释，一会用float解释，就很扯
 }
 /*
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
@@ -299,7 +379,35 @@ unsigned floatScale2(unsigned uf)
  */
 int floatFloat2Int(unsigned uf)
 {
-  return 2;
+  unsigned mask = (1 << 8) - 1;
+  unsigned bias = (1 << 7) - 1;
+  unsigned sign = (uf >> 31) & 0x1;
+  unsigned exp = (uf >> 23) & mask;
+  // uf 按float解释对应的值，在uint32表示范围内，就用uint32的整数值表示，否则返回 0x80000000
+  // NaN infinity
+  if (exp == mask)
+  {
+    return 0x80000000;
+  }
+  // 小数直接返回 0
+  if (exp < bias)
+  {
+    return 0;
+  }
+  // 0x3f800000 -> 1 ; 0x800000 -> 0
+  exp = exp - bias;
+  // 超出uint32表示范围
+  if (exp > 32)
+  {
+    return 0x80000000;
+  }
+  exp = 1 << exp;
+  // 0xbf800000 -> 11...111 -1  负数取反+1
+  if (sign == 1)
+  {
+    return (~exp) + 1;
+  }
+  return exp;
 }
 /*
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
@@ -316,5 +424,29 @@ int floatFloat2Int(unsigned uf)
  */
 unsigned floatPower2(int x)
 {
-  return 2;
+  // 0 -> 0x3f800000; 0x80000000 -> 0
+  int bias = (1 << 7) - 1;
+  int frac, exp;
+  // NaN infinity
+  // 阶码值的最大 1111 1110 -> e - bias = bias
+  if (x > bias)
+  {
+    return 0x7f800000;
+  }
+  // 最小分数 frac: 00..01 -> 2^(1 - bias - 23)
+  if (x < (1 - bias - 23))
+  {
+    return 0;
+  }
+  // 阶码为0 尾数有值
+  if (x < (1 - bias))
+  {
+    x = x - (1 - bias);
+    frac = 1 << (23 + x);
+    return frac;
+  }
+  // 阶码有值 尾数为0
+  exp = (x + bias) << 23;
+  return exp;
+  // 每次运行有的通过，但有几次超时了 。。。
 }

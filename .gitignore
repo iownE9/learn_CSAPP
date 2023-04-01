@@ -1,8 +1,6 @@
 # Prerequisites
-*.d
 
 # Object files
-*.o
 *.ko
 *.obj
 *.elf
@@ -63,3 +61,4 @@ dkms.conf
 *.tar
 .vscode
 Booksite/code/*
+Lab/online
