@@ -1,0 +1,8 @@
+This is an x86-64 bomb for self-study students. 
+
+> strings bomb > bomb-strings
+> objdump -d bomb > bomb.d
+> objdump -t bomb > bomb.t
+
+注意：
+windows 与 Linux 文本格式不同
