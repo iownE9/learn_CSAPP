@@ -1,5 +1,10 @@
 /* Demonstration of buffer overflow */
 
+/**
+ * 这题的溢出报错很微妙
+ * GCC 的升级，导致这份15年的代码编译结果又又又发生变化了 bufdemo-newsp
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -22,6 +27,7 @@ void echo()
 {
   char buf[4]; /* Way too small! */
   gets(buf);
+  // fgets(buf, 4, stdin);
   puts(buf);
 }
 

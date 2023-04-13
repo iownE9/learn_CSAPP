@@ -9,16 +9,19 @@ long switch_eg(long x, long y, long z)
   case 1:
     w = y * z;
     break;
+    
   case 2:
     w = y / z;
     /* Fall through */
   case 3:
     w += z;
     break;
+
   case 5:
   case 6:
     w -= z;
     break;
+
   default:
     w = 2;
   }
@@ -33,16 +36,19 @@ long sparse_switch_eg(long x, long y, long z)
   case 100:
     w = y * z;
     break;
+
   case 200:
     w = y / z;
     /* Fall through */
   case 300:
     w += z;
     break;
+
   case 500:
   case 600:
     w -= z;
     break;
+
   default:
     w = 2;
   }
