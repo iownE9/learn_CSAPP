@@ -9,3 +9,5 @@
 | Fall2021 | 助教答疑 | 15213-f21 |
 
 <https://www.bilibili.com/video/BV1yy4y117YN>
+
+<http://www.cs.cmu.edu/~213/activities/>
