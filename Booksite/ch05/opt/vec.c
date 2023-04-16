@@ -1,15 +1,21 @@
 #include <stdlib.h>
-#include "vec.h"
+#include "combine.h"
 
+/* $begin vec */
 /* Create vector of specified length */
-vec *new_vec(size_t len)
+vec_ptr new_vec(long len)
 {
     /* Allocate header structure */
-    vec *result = (vec *)malloc(sizeof(vec));
+    vec_ptr result = (vec_ptr)malloc(sizeof(vec_rec));
+    data_t *data = NULL;
     if (!result)
         return NULL; /* Couldn't allocate storage */
     result->len = len;
-    data_t *data = NULL;
+    /* $end vec */
+    /* We don't show this in the book */
+    result->allocated_len = len;
+    /* $begin vec */
+    /* Allocate array */
     if (len > 0)
     {
         data = (data_t *)calloc(len, sizeof(data_t));
@@ -25,7 +31,7 @@ vec *new_vec(size_t len)
 }
 
 /* Free storage used by vector */
-void free_vec(vec *v)
+void free_vec(vec_ptr v)
 {
     if (v->data)
         free(v->data);
@@ -36,33 +42,48 @@ void free_vec(vec *v)
  * Retrieve vector element and store at dest.
  * Return 0 (out of bounds) or 1 (successful)
  */
-int get_vec_element(vec *v, size_t index, data_t *dest)
+int get_vec_element(vec_ptr v, long index, data_t *dest)
 {
-    if (index >= v->len)
+    if (index < 0 || index >= v->len)
         return 0;
     *dest = v->data[index];
     return 1;
 }
 
 /* Return length of vector */
-size_t vec_length(vec *v)
+long vec_length(vec_ptr v)
 {
     return v->len;
 }
+/* $end vec */
 
-data_t *get_vec_start(vec *v)
+/* $begin get_vec_start */
+data_t *get_vec_start(vec_ptr v)
 {
     return v->data;
 }
+/* $end get_vec_start */
 
 /*
  * Set vector element.
  * Return 0 (out of bounds) or 1 (successful)
  */
-int set_vec_element(vec *v, size_t index, data_t val)
+int set_vec_element(vec_ptr v, long index, data_t val)
 {
-    if (index >= v->len)
+    if (index < 0 || index >= v->len)
         return 0;
     v->data[index] = val;
     return 1;
+}
+
+/* Set vector length.  If >= allocated length, will reallocate */
+void set_vec_length(vec_ptr v, long newlen)
+{
+    if (newlen > v->allocated_len)
+    {
+        free(v->data);
+        v->data = calloc(newlen, sizeof(data_t));
+        v->allocated_len = newlen;
+    }
+    v->len = newlen;
 }

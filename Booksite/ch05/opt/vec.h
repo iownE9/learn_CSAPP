@@ -1,24 +1,29 @@
 /* Sample data type */
 typedef double data_t;
 
+/* $begin adt */
 /* Create abstract data type for vector */
 typedef struct
 {
-    size_t len;
+    long len;
     data_t *data;
-} vec;
+    /* $end adt */
+    long allocated_len; /* NOTE: we don't use this field in the book */
+    /* $begin adt */
+} vec_rec, *vec_ptr;
+/* $end adt */
 
 /* Create vector */
-vec *new_vec(size_t len);
+vec_ptr new_vec(long len);
 
 /* Free storage used by vector */
-void free_vec(vec *v);
+void free_vec(vec_ptr v);
 
 /*
  * Retrieve vector element and store in dest.
  * Return 0 (out of bounds) or 1 (successful)
  */
-int get_vec_element(vec *v, size_t index, data_t *dest);
+int get_vec_element(vec_ptr v, long index, data_t *dest);
 
 /* Macro version */
 #define GET_VEC_ELEMENT(v, index, dest)      \
@@ -26,17 +31,17 @@ int get_vec_element(vec *v, size_t index, data_t *dest);
         *(dest) = (v)->data[(index)],        \
         1;
 
-data_t *get_vec_start(vec *v);
+data_t *get_vec_start(vec_ptr v);
 
 /*
  * Set vector element.
  * Return 0 (out of bounds) or 1 (successful)
  */
 
-int set_vec_element(vec *v, size_t index, data_t val);
+int set_vec_element(vec_ptr v, long index, data_t val);
 
 /* Get vector length */
-size_t vec_length(vec *v);
+long vec_length(vec_ptr v);
 
 /* Set length of vector.  If > allocated length, will reallocate */
-void set_vec_length(vec *v, size_t newlen);
+void set_vec_length(vec_ptr v, long newlen);
