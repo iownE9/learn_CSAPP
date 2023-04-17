@@ -79,7 +79,7 @@ int test(int elems, int stride)
     long length = elems;
     long limit = length - sx4;
 
-    /* Combine 4 elements at a time */
+    /* Combine 4 elements at a time 并行性 */
     for (i = 0; i < limit; i += sx4)
     {
         acc0 = acc0 + data[i];
@@ -89,7 +89,7 @@ int test(int elems, int stride)
     }
 
     /* Finish any remaining elements */
-    for (; i < length; i++)
+    for (; i < length; i += stride)
     {
         acc0 = acc0 + data[i];
     }

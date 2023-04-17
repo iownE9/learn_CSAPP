@@ -1,5 +1,5 @@
-/* 
- * fcycbmm.c - Compute time used by a function f that takes two integer args 
+/*
+ * fcycbmm.c - Compute time used by a function f that takes two integer args
  *   Modified for use with bmm.c.
  */
 #include <stdlib.h>
@@ -10,9 +10,8 @@
 #include "clock.h"
 #include "fcycbmm.h"
 
-
 /* defined in bmm.c */
-extern array ga, gb, gc;   
+extern array ga, gb, gc;
 void reset(array c, int n);
 
 static double *values = NULL;
@@ -35,7 +34,7 @@ static void init_sampler(int k, int maxsamples)
   if (samples)
     free(samples);
   /* Allocate extra for wraparound analysis */
-  samples = calloc(maxsamples+k, sizeof(double));
+  samples = calloc(maxsamples + k, sizeof(double));
 #endif
   samplecount = 0;
 }
@@ -44,11 +43,14 @@ static void init_sampler(int k, int maxsamples)
 void add_sample(double val, int k)
 {
   int pos = 0;
-  if (samplecount < k) {
+  if (samplecount < k)
+  {
     pos = samplecount;
     values[pos] = val;
-  } else if (val < values[k-1]) {
-    pos = k-1;
+  }
+  else if (val < values[k - 1])
+  {
+    pos = k - 1;
     values[pos] = val;
   }
 #if KEEP_SAMPLES
@@ -56,9 +58,10 @@ void add_sample(double val, int k)
 #endif
   samplecount++;
   /* Insertion sort */
-  while (pos > 0 && values[pos-1] > values[pos]) {
-    double temp = values[pos-1];
-    values[pos-1] = values[pos];
+  while (pos > 0 && values[pos - 1] > values[pos])
+  {
+    double temp = values[pos - 1];
+    values[pos - 1] = values[pos];
     values[pos] = temp;
     pos--;
   }
@@ -75,14 +78,14 @@ double err(int k)
 {
   if (samplecount < k)
     return 1000.0;
-  return (values[k-1] - values[0])/values[0];
+  return (values[k - 1] - values[0]) / values[0];
 }
 
 /* Have k minimum measurements converged within epsilon? */
 int has_converged(int k_arg, double epsilon_arg, int maxsamples)
 {
   if ((samplecount >= k_arg) &&
-      ((1 + epsilon_arg)*values[0] >= values[k_arg-1]))
+      ((1 + epsilon_arg) * values[0] >= values[k_arg - 1]))
     return samplecount;
   if ((samplecount >= maxsamples))
     return -1;
@@ -107,26 +110,31 @@ static void clear()
 }
 
 double fcyc_full(test_funct f, int n, int bsize, int clear_cache,
-		 int k, double epsilon, int maxsamples, int compensate) 
+                 int k, double epsilon, int maxsamples, int compensate)
 {
   double result;
   init_sampler(k, maxsamples);
-  if (compensate) {
-    do {
+  if (compensate)
+  {
+    do
+    {
       double cyc;
       if (clear_cache)
-	clear();
+        clear();
       reset(gc, n);
       start_comp_counter();
       f(ga, gb, gc, n, bsize);
       cyc = get_comp_counter();
       add_sample(cyc, k);
     } while (!has_converged(k, epsilon, maxsamples) && samplecount < maxsamples);
-  } else {
-    do {
+  }
+  else
+  {
+    do
+    {
       double cyc;
       if (clear_cache)
-	clear();
+        clear();
       reset(gc, n);
       start_counter();
       f(ga, gb, gc, n, bsize);
@@ -139,26 +147,18 @@ double fcyc_full(test_funct f, int n, int bsize, int clear_cache,
     int i;
     printf(" %d smallest values: [", k);
     for (i = 0; i < k; i++)
-      printf("%.0f%s", values[i], i==k-1 ? "]\n" : ", ");
+      printf("%.0f%s", values[i], i == k - 1 ? "]\n" : ", ");
   }
 #endif
   result = values[0];
 #if !KEEP_VALS
-  free(values); 
+  free(values);
   values = NULL;
 #endif
-  return result;  
+  return result;
 }
 
 double fcyc(test_funct f, int n, int bsize, int clearcache)
 {
   return fcyc_full(f, n, bsize, clearcache, 3, 0.01, 20, 0);
 }
-
-
-
-
-
-
-
-
