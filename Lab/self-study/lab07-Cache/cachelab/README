@@ -1,0 +1,56 @@
+This is the handout directory for the CS:APP Cache Lab. 
+
+分模块的话需要改 Makefile  
+
+but： “You will be modifying two files: csim.c and trans.c.”
+
+不足之处：csim.c 构造 cache 部分 134行, 内存分配错误处理不全。
+
+```
+> ./csim -s 1 -E 1 -b 1 -t traces/yi2.trace > me.txt
+> ./csim-ef -s 1 -E 1 -b 1 -t traces/yi2.trace > ref.txt
+> diff me.txt ref.txt
+
+> ./test-csim
+```
+
+linux> valgrind --log-fd=1 --tool=lackey -v --trace-mem=yes ls -l
+
+
+************************
+Running the autograders:
+************************
+
+Before running the autograders, compile your code:
+    linux> make
+
+Check the correctness of your simulator:
+    linux> ./test-csim
+
+Check the correctness and performance of your transpose functions:
+    linux> ./test-trans -M 32 -N 32
+    linux> ./test-trans -M 64 -N 64
+    linux> ./test-trans -M 61 -N 67
+
+Check everything at once (this is the program that your instructor runs):
+    linux> ./driver.py    
+
+******
+Files:
+******
+
+# You will modifying and handing in these two files
+csim.c       Your cache simulator
+trans.c      Your transpose function
+
+# Tools for evaluating your simulator and transpose function
+Makefile     Builds the simulator and tools
+README       This file
+driver.py*   The driver program, runs test-csim and test-trans
+cachelab.c   Required helper functions
+cachelab.h   Required header file
+csim-ref*    The executable reference cache simulator
+test-csim*   Tests your cache simulator
+test-trans.c Tests your transpose function
+tracegen.c   Helper program used by test-trans
+traces/      Trace files used by test-csim.c

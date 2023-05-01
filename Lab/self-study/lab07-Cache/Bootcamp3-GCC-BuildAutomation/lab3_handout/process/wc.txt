@@ -1,0 +1,5 @@
+  263  1596 12752 optimization0.txt
+ 194 1155 9028 optimization1.txt
+  392  2478 19126 optimization2.txt
+  392  2478 19126 optimization3.txt
+ 191 1112 8861 optimizationOs.txt

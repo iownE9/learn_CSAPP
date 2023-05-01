@@ -64,8 +64,7 @@ elem delete_nodes(elem data, list l);
 /* @brief: map a function across all data elements in the list
  * @param l: list to perform map on
  * @param: fn: fn ptr to be invoked on each data element
- * @runtime: O(1) 
- */
+ * @runtime: O(1) */
 void map(list l, map_fn fn); 
 
 /* @brief: return the number of nodes in the list
