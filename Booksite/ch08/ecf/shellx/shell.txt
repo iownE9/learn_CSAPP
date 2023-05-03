@@ -1,0 +1,14 @@
+> ls
+Makefile  shellex  shellex.c
+steve@Steve ~/l/B/c/e/shellx (main)> ./shellex
+> /bin/ls
+Makefile  shellex  shellex.c
+> /bin/ls -l shellex.c
+-rw-rw-r-- 1 steve steve 2697 May  2 22:45 shellex.c
+> /bin/ps w
+    PID TTY      STAT   TIME COMMAND
+  55082 pts/0    Ss     0:00 -sh
+  55137 pts/0    S      0:02 fish
+  58548 pts/0    S+     0:00 ./shellex
+  58551 pts/0    R+     0:00 /bin/ps w
+> quit
