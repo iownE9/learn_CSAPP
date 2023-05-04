@@ -12,3 +12,11 @@ int main()
     fflush(stdout);
     exit(0);
 }
+
+/*
+> strace -e trace=write ./hello
+write(1, "hello\n", 6hello
+)                  = 6
++++ exited with 0 +++
+
+*/

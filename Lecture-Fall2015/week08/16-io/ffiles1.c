@@ -1,5 +1,7 @@
 #include "csapp.h"
 
+//  touch fd{1,2,3}.txt
+
 int main(int argc, char *argv[])
 {
     int fd1, fd2, fd3;

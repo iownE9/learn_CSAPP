@@ -3,11 +3,10 @@ CC = gcc
 CSAPP_INC = .
 CSAPP_SRC = .
 
-CFLAGS = -Wall -g -Og -I $(CSAPP_INC) -I .
+CFLAGS = -Wall -O2 -I $(CSAPP_INC) -I .
 LDLIBS = -lpthread
 
 PROGS =	statcheck\
-	cpstdin\
 	cpfile\
 	hello\
 	ffiles1\
