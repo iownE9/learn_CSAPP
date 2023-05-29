@@ -1,6 +1,10 @@
 /*
  * echoserveri.c - An iterative echo server
+ *
+ * ./echoserveri 8080 &
+ *
  */
+
 /* $begin echoserverimain */
 #include "csapp.h"
 
@@ -28,6 +32,7 @@ int main(int argc, char **argv)
                     client_port, MAXLINE, 0);
         printf("Connected to (%s, %s)\n", client_hostname, client_port);
         echo(connfd);
+        printf("Close (%s, %s)\n", client_hostname, client_port);
         Close(connfd);
     }
     exit(0);

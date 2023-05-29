@@ -3,13 +3,8 @@
  * tiny.c - A simple, iterative HTTP/1.0 Web server that uses the
  *     GET method to serve static and dynamic content.
  *
- * GET /cgi-bin/adder?15000&213 HTTP/1.1
- * GET / HTTP/1.1
- * GET /godzilla.gif HTTP/1.1
- * 
- * GET /godzilla.gif/ HTTP/1.1
- * GET /abcgi-bingo.html HTTP/1.1
- *
+ * Updated 11/2019 droh
+ *   - Fixed sprintf() aliasing issue in serve_static(), and clienterror().
  */
 #include "csapp.h"
 
@@ -22,7 +17,6 @@ void serve_dynamic(int fd, char *filename, char *cgiargs);
 void clienterror(int fd, char *cause, char *errnum,
                  char *shortmsg, char *longmsg);
 
-// p672
 int main(int argc, char **argv)
 {
     int listenfd, connfd;
@@ -54,7 +48,7 @@ int main(int argc, char **argv)
 /*
  * doit - handle one HTTP request/response transaction
  */
-/* $begin doit p673 */
+/* $begin doit */
 void doit(int fd)
 {
     int is_static;
@@ -175,13 +169,13 @@ void serve_static(int fd, char *filename, int filesize)
     /* Send response headers to client */
     get_filetype(filename, filetype);    // line:netp:servestatic:getfiletype
     sprintf(buf, "HTTP/1.0 200 OK\r\n"); // line:netp:servestatic:beginserve
-    sprintf(buf, "%sServer: Tiny Web Server\r\n", buf);
-    sprintf(buf, "%sConnection: close\r\n", buf);
-    sprintf(buf, "%sContent-length: %d\r\n", buf, filesize);
-    sprintf(buf, "%sContent-type: %s\r\n\r\n", buf, filetype);
+    Rio_writen(fd, buf, strlen(buf));
+    sprintf(buf, "Server: Tiny Web Server\r\n");
+    Rio_writen(fd, buf, strlen(buf));
+    sprintf(buf, "Content-length: %d\r\n", filesize);
+    Rio_writen(fd, buf, strlen(buf));
+    sprintf(buf, "Content-type: %s\r\n\r\n", filetype);
     Rio_writen(fd, buf, strlen(buf)); // line:netp:servestatic:endserve
-    printf("Response headers:\n");
-    printf("%s", buf);
 
     /* Send response body to client */
     srcfd = Open(filename, O_RDONLY, 0);                        // line:netp:servestatic:open
@@ -237,29 +231,30 @@ void serve_dynamic(int fd, char *filename, char *cgiargs)
 /*
  * clienterror - returns an error message to the client
  */
-/* $begin clienterror p674 */
+/* $begin clienterror */
 void clienterror(int fd, char *cause, char *errnum,
                  char *shortmsg, char *longmsg)
 {
-    char buf[MAXLINE], body[MAXBUF];
+    char buf[MAXLINE];
 
-    /* Build the HTTP response body */
-    sprintf(body, "<html><title>Tiny Error</title>");
-    sprintf(body, "%s<body bgcolor="
-                  "ffffff"
-                  ">\r\n",
-            body);
-    sprintf(body, "%s%s: %s\r\n", body, errnum, shortmsg);
-    sprintf(body, "%s<p>%s: %s\r\n", body, longmsg, cause);
-    sprintf(body, "%s<hr><em>The Tiny Web server</em>\r\n", body);
-
-    /* Print the HTTP response */
+    /* Print the HTTP response headers */
     sprintf(buf, "HTTP/1.0 %s %s\r\n", errnum, shortmsg);
     Rio_writen(fd, buf, strlen(buf));
-    sprintf(buf, "Content-type: text/html\r\n");
+    sprintf(buf, "Content-type: text/html\r\n\r\n");
     Rio_writen(fd, buf, strlen(buf));
-    sprintf(buf, "Content-length: %d\r\n\r\n", (int)strlen(body));
+
+    /* Print the HTTP response body */
+    sprintf(buf, "<html><title>Tiny Error</title>");
     Rio_writen(fd, buf, strlen(buf));
-    Rio_writen(fd, body, strlen(body));
+    sprintf(buf, "<body bgcolor="
+                 "ffffff"
+                 ">\r\n");
+    Rio_writen(fd, buf, strlen(buf));
+    sprintf(buf, "%s: %s\r\n", errnum, shortmsg);
+    Rio_writen(fd, buf, strlen(buf));
+    sprintf(buf, "<p>%s: %s\r\n", longmsg, cause);
+    Rio_writen(fd, buf, strlen(buf));
+    sprintf(buf, "<hr><em>The Tiny Web server</em>\r\n");
+    Rio_writen(fd, buf, strlen(buf));
 }
 /* $end clienterror */

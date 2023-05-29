@@ -1,5 +1,7 @@
-/* $begin hostinfo */
+/* $begin hostinfo p659 */
 #include "csapp.h"
+
+// ./hostinfo baidu.com
 
 int main(int argc, char **argv)
 {
@@ -15,10 +17,9 @@ int main(int argc, char **argv)
 
     /* Get a list of addrinfo records */
     memset(&hints, 0, sizeof(struct addrinfo));
-#if 0
-    hints.ai_family = AF_INET;       /* IPv4 only */        //line:netp:hostinfo:family
-#endif
+    hints.ai_family = AF_INET; /* IPv4 only */              // line:netp:hostinfo:family
     hints.ai_socktype = SOCK_STREAM; /* Connections only */ // line:netp:hostinfo:socktype
+    // argv[1] -> 域名
     if ((rc = getaddrinfo(argv[1], NULL, &hints, &listp)) != 0)
     {
         fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(rc));

@@ -1,5 +1,8 @@
 /*
  * echoclient.c - An echo client
+ *
+ * ./echoclient localhost 8080
+ * 
  */
 /* $begin echoclientmain */
 #include "csapp.h"
@@ -19,7 +22,7 @@ int main(int argc, char **argv)
     port = argv[2];
 
     clientfd = Open_clientfd(host, port);
-    Rio_readinitb(&rio, clientfd);
+    Rio_readinitb(&rio, clientfd); // 关联文件描述符
 
     while (Fgets(buf, MAXLINE, stdin) != NULL)
     {
