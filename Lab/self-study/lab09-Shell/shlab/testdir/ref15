@@ -1,0 +1,29 @@
+./sdriver.pl -t trace15.txt -s ./tshref -a "-p"
+#
+# trace15.txt - Putting it all together
+#
+tsh> ./bogus
+./bogus: Command not found
+tsh> ./myspin 10
+Job [1] (7438) terminated by signal 2
+tsh> ./myspin 3 &
+[1] (7440) ./myspin 3 &
+tsh> ./myspin 4 &
+[2] (7442) ./myspin 4 &
+tsh> jobs
+[1] (7440) Running ./myspin 3 &
+[2] (7442) Running ./myspin 4 &
+tsh> fg %1
+Job [1] (7440) stopped by signal 20
+tsh> jobs
+[1] (7440) Stopped ./myspin 3 &
+[2] (7442) Running ./myspin 4 &
+tsh> bg %3
+%3: No such job
+tsh> bg %1
+[1] (7440) ./myspin 3 &
+tsh> jobs
+[1] (7440) Running ./myspin 3 &
+[2] (7442) Running ./myspin 4 &
+tsh> fg %1
+tsh> quit

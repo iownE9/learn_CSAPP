@@ -1,0 +1,40 @@
+1c1
+< ./sdriver.pl -t trace13.txt -s ./tshref -a "-p"
+---
+> ./sdriver.pl -t trace13.txt -s ./tsh -a "-p"
+6c6
+< Job [1] (7368) stopped by signal 20
+---
+> Job [1] (7381) stopped by signal 20
+8c8
+< [1] (7368) Stopped ./mysplit 4 
+---
+> [1] (7381) Stopped ./mysplit 4 
+18,24c18,24
+<    7363 pts/0    S+     0:00 make rtest13
+<    7364 pts/0    S+     0:00 /bin/sh -c ./sdriver.pl -t trace13.txt -s ./tshref -a "-p"
+<    7365 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tshref -a -p
+<    7366 pts/0    S+     0:00 ./tshref -p
+<    7368 pts/0    T      0:00 ./mysplit 4
+<    7369 pts/0    T      0:00 ./mysplit 4
+<    7372 pts/0    R      0:00 /bin/ps a
+---
+>    7376 pts/0    S+     0:00 make test13
+>    7377 pts/0    S+     0:00 /bin/sh -c ./sdriver.pl -t trace13.txt -s ./tsh -a "-p"
+>    7378 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tsh -a -p
+>    7379 pts/0    S+     0:00 ./tsh -p
+>    7381 pts/0    T      0:00 ./mysplit 4
+>    7382 pts/0    T      0:00 ./mysplit 4
+>    7385 pts/0    R      0:00 /bin/ps a
+35,39c35,39
+<    7363 pts/0    S+     0:00 make rtest13
+<    7364 pts/0    S+     0:00 /bin/sh -c ./sdriver.pl -t trace13.txt -s ./tshref -a "-p"
+<    7365 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tshref -a -p
+<    7366 pts/0    S+     0:00 ./tshref -p
+<    7375 pts/0    R      0:00 /bin/ps a
+---
+>    7376 pts/0    S+     0:00 make test13
+>    7377 pts/0    S+     0:00 /bin/sh -c ./sdriver.pl -t trace13.txt -s ./tsh -a "-p"
+>    7378 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tsh -a -p
+>    7379 pts/0    S+     0:00 ./tsh -p
+>    7388 pts/0    R      0:00 /bin/ps a

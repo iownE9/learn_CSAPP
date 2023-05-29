@@ -1,0 +1,8 @@
+1c1
+< ./sdriver.pl -t trace06.txt -s ./tshref -a "-p"
+---
+> ./sdriver.pl -t trace06.txt -s ./tsh -a "-p"
+6c6
+< Job [1] (7220) terminated by signal 2
+---
+> Job [1] (7226) terminated by signal 2

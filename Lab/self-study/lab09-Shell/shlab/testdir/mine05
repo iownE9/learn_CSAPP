@@ -1,0 +1,11 @@
+./sdriver.pl -t trace05.txt -s ./tsh -a "-p"
+#
+# trace05.txt - Process jobs builtin command.
+#
+tsh> ./myspin 2 &
+[1] (7209) ./myspin 2 &
+tsh> ./myspin 3 &
+[2] (7211) ./myspin 3 &
+tsh> jobs
+[1] (7209) Running ./myspin 2 &
+[2] (7211) Running ./myspin 3 &

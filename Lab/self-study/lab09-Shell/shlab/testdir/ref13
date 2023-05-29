@@ -1,0 +1,39 @@
+./sdriver.pl -t trace13.txt -s ./tshref -a "-p"
+#
+# trace13.txt - Restart every stopped process in process group
+#
+tsh> ./mysplit 4
+Job [1] (7368) stopped by signal 20
+tsh> jobs
+[1] (7368) Stopped ./mysplit 4 
+tsh> /bin/ps a
+    PID TTY      STAT   TIME COMMAND
+    868 ttyS0    Ss+    0:00 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 ttyS0 vt220
+    890 tty1     Ss+    0:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+   3707 pts/1    Ss     0:00 -sh
+   3766 pts/1    S+     0:00 fish
+   4914 pts/0    Ss     0:00 -sh
+   4969 pts/0    S      0:01 fish
+   7145 pts/0    S+     0:00 /bin/bash ./mine.sh
+   7363 pts/0    S+     0:00 make rtest13
+   7364 pts/0    S+     0:00 /bin/sh -c ./sdriver.pl -t trace13.txt -s ./tshref -a "-p"
+   7365 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tshref -a -p
+   7366 pts/0    S+     0:00 ./tshref -p
+   7368 pts/0    T      0:00 ./mysplit 4
+   7369 pts/0    T      0:00 ./mysplit 4
+   7372 pts/0    R      0:00 /bin/ps a
+tsh> fg %1
+tsh> /bin/ps a
+    PID TTY      STAT   TIME COMMAND
+    868 ttyS0    Ss+    0:00 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 ttyS0 vt220
+    890 tty1     Ss+    0:00 /sbin/agetty -o -p -- \u --noclear tty1 linux
+   3707 pts/1    Ss     0:00 -sh
+   3766 pts/1    S+     0:00 fish
+   4914 pts/0    Ss     0:00 -sh
+   4969 pts/0    S      0:01 fish
+   7145 pts/0    S+     0:00 /bin/bash ./mine.sh
+   7363 pts/0    S+     0:00 make rtest13
+   7364 pts/0    S+     0:00 /bin/sh -c ./sdriver.pl -t trace13.txt -s ./tshref -a "-p"
+   7365 pts/0    S+     0:00 /usr/bin/perl ./sdriver.pl -t trace13.txt -s ./tshref -a -p
+   7366 pts/0    S+     0:00 ./tshref -p
+   7375 pts/0    R      0:00 /bin/ps a

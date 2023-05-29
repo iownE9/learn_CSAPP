@@ -14,6 +14,7 @@ int main(int argc, char **argv)
     // {
     if ((pid = Fork()) == 0)
     { /* Child process */
+        setpgid(0, 0);
         sleep(5);
         Execve("/bin/date", argv, NULL);
         printf("child\n");
@@ -22,7 +23,7 @@ int main(int argc, char **argv)
 
     printf("pid = %d\n", pid);
 
-    while ((pid = Waitpid(-1, NULL, 0) > 0))
+    if ((pid = Waitpid(pid, NULL, 0)) > 0)
     {
         printf(" wait pid = %d\n", pid);
     }

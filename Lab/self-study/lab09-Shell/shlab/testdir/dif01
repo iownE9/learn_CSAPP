@@ -1,0 +1,4 @@
+1c1
+< ./sdriver.pl -t trace01.txt -s ./tshref -a "-p"
+---
+> ./sdriver.pl -t trace01.txt -s ./tsh -a "-p"

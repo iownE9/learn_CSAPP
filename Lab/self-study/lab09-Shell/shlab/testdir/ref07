@@ -1,0 +1,10 @@
+./sdriver.pl -t trace07.txt -s ./tshref -a "-p"
+#
+# trace07.txt - Forward SIGINT only to foreground job.
+#
+tsh> ./myspin 4 &
+[1] (7234) ./myspin 4 &
+tsh> ./myspin 5
+Job [2] (7236) terminated by signal 2
+tsh> jobs
+[1] (7234) Running ./myspin 4 &

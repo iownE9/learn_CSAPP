@@ -1,0 +1,16 @@
+1c1
+< ./sdriver.pl -t trace10.txt -s ./tshref -a "-p"
+---
+> ./sdriver.pl -t trace10.txt -s ./tsh -a "-p"
+6c6
+< [1] (7304) ./myspin 4 &
+---
+> [1] (7314) ./myspin 4 &
+8c8
+< Job [1] (7304) stopped by signal 20
+---
+> Job [1] (7314) stopped by signal 20
+10c10
+< [1] (7304) Stopped ./myspin 4 &
+---
+> [1] (7314) Stopped ./myspin 4 &
