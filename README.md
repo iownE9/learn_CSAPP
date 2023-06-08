@@ -6,6 +6,8 @@
 
 <https://www.cs.cmu.edu/afs/cs/academic/class/15213-m22/www/lectures/>
 
+<https://www.andrew.cmu.edu/course/15-123-kesden/index/lecture_index.html>
+
 ## Directory description
 
 | dir | desc | src |

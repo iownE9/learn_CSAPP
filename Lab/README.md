@@ -10,4 +10,8 @@
 
 <https://www.bilibili.com/video/BV1yy4y117YN>
 
+<https://www.youtube.com/@user-jr5ti1gm3d/videos>
+
 <http://www.cs.cmu.edu/~213/activities/>
+
+<https://www.cs.cmu.edu/~213/bootcamps/>

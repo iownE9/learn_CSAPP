@@ -16,7 +16,7 @@
 /*
  * If NEXT_FIT defined use next fit search, else use first-fit search
  */
-#define NEXT_FITx
+#define NEXT_FIT
 
 /* $begin mallocmacros */
 /* Basic constants and macros */
@@ -174,8 +174,10 @@ static void *coalesce(void *bp)
     { /* Case 2 */
         size += GET_SIZE(HDRP(NEXT_BLKP(bp)));
         PUT(HDRP(bp), PACK(size, 0));
-        PUT(FTRP(bp), PACK(size, 0)); // 推迟合并 p595
-        // PUT(FTRP(NEXT_BLKP(bp)), PACK(size, 0)); // 立即合并
+        PUT(FTRP(bp), PACK(size, 0)); // FTRP 宏建立在 HDRP 宏基础上
+        // PUT(FTRP(NEXT_BLKP(bp)), PACK(size, 0)); // 立即合并 => 理解错误
+        // 坑了我的 malloclab 找了好久 
+        // 一开始看课本就没理解到位 😔
     }
 
     else if (!prev_alloc && next_alloc)
@@ -303,7 +305,7 @@ static void place(void *bp, size_t asize)
         PUT(FTRP(bp), PACK(csize - asize, 0));
     }
     else
-    { // 推迟合并
+    {
         PUT(HDRP(bp), PACK(csize, 1));
         PUT(FTRP(bp), PACK(csize, 1));
     }
