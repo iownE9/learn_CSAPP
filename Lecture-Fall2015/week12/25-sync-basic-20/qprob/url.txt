@@ -1,0 +1,10 @@
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/Name
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/Last modified
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/Size
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/Description
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/Parent Directory
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/Makefile
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/csapp.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/csapp.h
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/sharing
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/sharing.c

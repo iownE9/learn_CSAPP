@@ -12,5 +12,10 @@ Files:
 	sortbench-run.pl: Run tests and collect data
 	Makefile
 
-	
+Make ERROR:  
+/usr/bin/ld: csapp.o: relocation R_X86_64_32 against `.rodata.str1.1' can not be used when making a PIE object; recompile with -fPIE   
+/usr/bin/ld: failed to set dynamic section sizes: bad value  
+collect2: error: ld returned 1 exit status  
+make: *** [Makefile:23: sortbench] Error 1  
+
 	

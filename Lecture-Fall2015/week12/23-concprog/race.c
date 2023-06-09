@@ -10,7 +10,6 @@
   the probability of two threads using the same bucket is very low.
 */
 
-
 /* How many threads will be created */
 
 #define CNT 100
@@ -34,65 +33,75 @@ int ireps[CNT] = {0};
 void access_counter(unsigned *hi, unsigned *lo)
 {
   /* Get cycle counter */
-  asm("rdtsc; movl %%edx,%0; movl %%eax,%1" 
-      : "=r" (*hi), "=r" (*lo)
-      : /* No input */ 
+  asm("rdtsc; movl %%edx,%0; movl %%eax,%1"
+      : "=r"(*hi), "=r"(*lo)
+      : /* No input */
       : "%edx", "%eax");
 }
 
 /* return number between 0 & POP-1 based on cycle counter */
-int sample_index() {
+int sample_index()
+{
   unsigned hi, lo;
   access_counter(&hi, &lo);
   return lo % POP;
 }
 
-static void save_value(int i) {
-    int s = sample_index();
-    ivals[s] = i;
+static void save_value(int i)
+{
+  int s = sample_index();
+  ivals[s] = i;
 }
-
 
 /* thread routine */
-void *thread(void *vargp) 
-{  
-    Pthread_detach(pthread_self());
-    int i = *((int *)vargp);
-    save_value(i);
-    return NULL;
+void *thread(void *vargp)
+{
+  Pthread_detach(pthread_self());
+  int i = *((int *)vargp);
+  save_value(i);
+  return NULL;
 }
 
-int main(int argc, char *argv[]) {
-    int i, r, maxr, s;
-    pthread_t tid;
-    int scount = 0;
-    for (i = 0; i < CNT; i++) {
-      Pthread_create(&tid, NULL, thread, &i);
-    }
-    sleep(5);
-    for (s = 0; s < POP; s++) {
-      if (ivals[s] > 0) {
-	scount++;
+int main(int argc, char *argv[])
+{
+  int i, r, maxr, s;
+  pthread_t tid;
+  int scount = 0;
+
+  for (i = 0; i < CNT; i++)
+  {
+    Pthread_create(&tid, NULL, thread, &i);
+  }
+
+  sleep(5);
+  for (s = 0; s < POP; s++)
+  {
+    if (ivals[s] > 0)
+    {
+      scount++;
 #if 0
 	printf("Sample %d, index %d\n", s, ivals[s]);
 #endif
-	ihist[ivals[s]]++;
-      }
+      ihist[ivals[s]]++;
     }
-    maxr = -1;
-    printf("Value\tCount\n");
-    for (i = 0; i < CNT; i++) {
-      r = ihist[i];
-      ireps[r]++;
-      if (r > maxr)
-	maxr = r;
-      printf("%d\t%d\n", i, ihist[i]);
-    }
-    printf("%d samples detected\n", scount);
-    
-    for (r = 0; r <= maxr; r++) {
-      printf("%d\t%d\n", r, ireps[r]);
-    }
+  }
+  maxr = -1;
+  printf("Value\tCount\n");
+  
+  for (i = 0; i < CNT; i++)
+  {
+    r = ihist[i];
+    ireps[r]++;
+    if (r > maxr)
+      maxr = r;
+    printf("%d\t%d\n", i, ihist[i]);
+  }
+  printf("%d samples detected\n", scount);
 
-    return 0;
+  for (r = 0; r <= maxr; r++)
+  {
+    printf("%d\t%d\n", r, ireps[r]);
+  }
+
+  return 0;
 }

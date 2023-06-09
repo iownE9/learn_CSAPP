@@ -1,5 +1,4 @@
 CC = gcc
-
 CFLAGS = -O1 -Wall
 
 all: sortbench sortbench-lc

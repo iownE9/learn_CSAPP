@@ -1,0 +1,27 @@
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/Name
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/Last modified
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/Size
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/Description
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/Parent Directory
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/Makefile
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/README.txt
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/badcnt
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/badcnt.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/badcnt.s
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/csapp.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/csapp.h
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/goodcnt
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/goodcnt.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/goodcnt.s
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/goodmcnt
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/goodmcnt.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/goodmcnt.s
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/produce-consume
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/produce-consume.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/pthreads_interpose/
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/pthreads_wrapper.so
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/qprob/
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/sbuf.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/sbuf.h
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/sharing
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/25-sync-basic/sharing.c

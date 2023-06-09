@@ -12,7 +12,8 @@ typedef void (*sort_fun_t)(data_t *base, size_t nele, data_t *scratch_base);
 
 /* Tuning parameters */
 /* Verbosity level */
-extern int verbose;;
+extern int verbose;
+;
 /* How small do partitions need to be relative to original size
    before using sequential sort & sequential partititoning */
 extern size_t serial_sort_fraction;

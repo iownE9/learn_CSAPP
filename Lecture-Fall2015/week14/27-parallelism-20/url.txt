@@ -1,0 +1,23 @@
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/Name
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/Last modified
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/Size
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/Description
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/Parent Directory
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/Makefile
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/csapp.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/csapp.h
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/csapp.o
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/pqsort-dbug/
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/pqsort/
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum-backup.txt
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum-data.txt
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum-run.pl
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum-spacing.pl
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum-spacing.txt
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/psum.xlsx
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/realtimer.c
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/realtimer.h
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/realtimer.o
+https://www.cs.cmu.edu/afs/cs/academic/class/15213-f20/www/code/27-parallelism/tmp/
