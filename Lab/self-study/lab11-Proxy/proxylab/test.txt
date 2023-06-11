@@ -1,0 +1,30 @@
+
+GET /csapp.c HTTP/1.0
+GET /csapp.h HTTP/1.0
+GET /csapp.o HTTP/1.0
+
+
+
+GET /Makefile HTTP/1.0
+GET /README HTTP/1.0
+
+==========个别时候 tiny 应用 以下资源不能找到 显示404 就离谱
+
+curl --max-time 5 --proxy http://localhost:8081 --output csapp.h http://localhost:8080/csapp.h
+
+
+GET / HTTP/1.0
+
+GET /home.html HTTP/1.0
+
+GET /tiny.c HTTP/1.0
+
+GET /godzilla.gif HTTP/1.0
+GET /godzilla.jpg HTTP/1.0
+
+GET /cgi-bin/adder?12&21 HTTP/1.0
+GET /cgi-bin/adder?12&28 HTTP/1.0
+
+
+driver.sh 301行改为：
+python3 nop-server.py ${nop_port} &> /dev/null &
